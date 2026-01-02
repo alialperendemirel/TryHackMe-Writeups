@@ -17,24 +17,24 @@ The methodology follows a standard penetration testing kill chain: Enumeration, 
 ### Nmap Scan
 I started with a comprehensive Nmap scan to identify open ports and running services on the target machine. The following command was used to scan all ports and detect versions:
 
-`nmap -sC -sV -p- -T4 -oN nmap_scan.txt <TARGET_IP>`
+`nmap -sC -sV -p- -T4 -F  <TARGET_IP>`
 
 **Result:** The scan revealed Port 22 (SSH) and **Port 80 (HTTP - Apache Web Server)** were open. I focused my attention on Port 80 as the primary entry vector.
 
-*(Add Nmap image here)*
-![Nmap Scan Result](Your_Image_Name.png)
+
+![Nmap Scan Result](nmap.png)
 
 ### Web Directory Enumeration with Gobuster
 Used Gobuster to find hidden directories and pages on the web server that were not linked on the homepage.
 
-`gobuster dir -u http://<TARGET_IP> -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 50`
+`gobuster dir -u http://<TARGET_IP> -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 100`
 
 **Result:** Two critical directories were discovered:
 * `/panel/`: An upload page.
 * `/uploads/`: The directory where uploaded files are stored.
 
-*(Add Gobuster image here)*
-![Gobuster Scan Result](Your_Image_Name.png)
+
+![Gobuster Scan Result](gobuster.png)
 
 ---
 
@@ -47,8 +47,8 @@ I targeted the upload form located at `/panel/` to gain a foothold on the system
     `nc -lvnp 1234`
 3.  I triggered the payload by navigating to `/uploads/shell.phtml` in the web browser, resulting in a low-privileged shell (www-data).
 
-*(Add Netcat image here)*
-![Netcat Reverse Shell](Your_Image_Name.png)
+
+![Netcat Reverse Shell](nc.png)
 
 * **User Flag:** Once inside, I located the first flag using `find / -name user.txt 2>/dev/null`.
 
