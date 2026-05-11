@@ -1,4 +1,4 @@
-# TryHackMe: Injectics - Writeup & Walkthrough
+# TryHackMe: Injectics - Writeup & Walkthrough Nikto
 
 **Oda Seviyesi:** Medium / Premium
 **Konseptler:** SQL Injection (SQLi), Authentication Bypass, Destructive SQLi, Server-Side Template Injection (SSTI), RCE, Client-Side vs Server-Side Validation.
